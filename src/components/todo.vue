@@ -19,20 +19,26 @@
         if (input_content.value.trim() === '')
         {
             formValidationMsg.value = "文字を入力してください"
-            throw "It doesn't meet form validation"
+            return false
         }
 
         if (input_category.value === null)
         {
             formValidationMsg.value = "カテゴリを選択してください"
-            throw "It doesn't meet form validation"
+            return false
         }
+
+        return true
 
     }
 
     const addTodo = () => {
 
-        validateTodo()
+        const valiFlg = validateTodo()
+
+        if (!valiFlg) {
+            throw "aaaa"
+        }
 
         todos.value.push({
             content: input_content.value,
@@ -130,7 +136,7 @@
                     </label>
                 </div>
                 <input type="submit" value="Add todo" />
-            </form>
+            </form> 
             <p style="color:red">
                 {{  formValidationMsg }}
             </p>
